@@ -15,6 +15,8 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
+    // Indica si hay una reproducción en curso.
+    private boolean estaReproduciendo;
 
     /**
      * Create a MusicOrganizer
@@ -24,6 +26,7 @@ public class MusicOrganizer
         tracks = new ArrayList<Track>();
         player = new MusicPlayer();
         reader = new TrackReader();
+        estaReproduciendo = false;
         readLibrary("audio");
         System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
         System.out.println();
@@ -58,6 +61,7 @@ public class MusicOrganizer
             player.startPlaying(track.getFilename());
             System.out.println("Now playing: " + track.getArtist() + " - " + track.getTitle());
             track.incrementarUnaUnidadPlayCount();
+            estaReproduciendo = true;
         }
     }
 
@@ -126,6 +130,7 @@ public class MusicOrganizer
         if(tracks.size() > 0) {
             player.startPlaying(tracks.get(0).getFilename());
             tracks.get(0).incrementarUnaUnidadPlayCount();
+            estaReproduciendo = true;
         }
     }
 
@@ -135,6 +140,7 @@ public class MusicOrganizer
     public void stopPlaying()
     {
         player.stop();
+        estaReproduciendo = false;
     }
 
     /**
@@ -185,13 +191,25 @@ public class MusicOrganizer
             }
         }
     }
-    
+
     /**
      * Fija el album de la canción seleccionada.
      */
     public void fijarAlbum(int indice, String album) {
         if(indice >= 0 && indice < tracks.size()) {
             tracks.get(indice).fijarAlbum(album);
+        }
+    }
+
+    /**
+     * Muestra por pantalla si hay una canción en reproducción o no.
+     */
+    public void isPlaying() {        
+        if(estaReproduciendo == true) {
+            System.out.println("Hay una canción reproduciéndose en este momento.");                   
+        }
+        else {
+            System.out.println("No hay ninguna canción reproduciéndose.");
         }
     }
 }
