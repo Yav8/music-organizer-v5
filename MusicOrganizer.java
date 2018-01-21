@@ -185,4 +185,13 @@ public class MusicOrganizer
             }
         }
     }
+    
+    /**
+     * Fija el album de la canción seleccionada.
+     */
+    public void fijarAlbum(int indice, String album) {
+        if(indice >= 0 && indice < tracks.size()) {
+            tracks.get(indice).fijarAlbum(album);
+        }
+    }
 }

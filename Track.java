@@ -15,6 +15,8 @@ public class Track
     private String filename;
     // Contabiliza el número de reproducciones de las canciones.
     private int playCount;
+    // El album al que pertenecen las canciones.
+    private String album;
 
     /**
      * Constructor for objects of class Track.
@@ -26,6 +28,7 @@ public class Track
     {
         setDetails(artist, title, filename);
         playCount = 0;
+        album = "";
     }
 
     /**
@@ -38,6 +41,7 @@ public class Track
     {
         setDetails("unknown", "unknown", filename);
         playCount = 0;
+        album = "";
     }
 
     /**
@@ -73,7 +77,7 @@ public class Track
      */
     public String getDetails()
     {
-        return artist + ": " + title + "  (file: " + filename + ")" + " - Reproducciones: " + playCount;
+        return artist + ": " + title + "  (file: " + filename + ")" + " - Reproducciones: " + playCount + " - Album: " + album;
     }
 
     /**
@@ -101,5 +105,19 @@ public class Track
      */
     public void reinicializarPlayCount() {
         playCount = 0;
+    }
+    
+    /**
+     * Devuelve el album.
+     */
+    public String obtenerAlbum() {
+        return album;
+    }
+    
+    /**
+     * Fija el album.
+     */
+    public void fijarAlbum(String album) {
+        this.album = album;
     }
 }
